@@ -1,23 +1,22 @@
 class User {
-   int userId;
-   String name;
+   String firstname;
+   String lastname;
    String email;
    String phone;
-   String type;
-   String token;
-   String renewalToken;
+   int curr_org_id;
+   String api_key;
 
-   User({required this.userId, required this.name, required this.email, required this.phone, required this.type, required this.token, required this.renewalToken});
+
+   User({required this.firstname, required this.lastname, required this.email, required this.phone, required this.curr_org_id, required this.api_key});
 
    factory User.fromJson(Map<String, dynamic> responseData) {
      return User(
-       userId: responseData['id'],
-       name: responseData['name'],
+       firstname: responseData['firstname'],
+       lastname: responseData['lastname'],
        email: responseData['email'],
        phone: responseData['phone'],
-       type: responseData['type'],
-       token: responseData['token'],
-       renewalToken: responseData['renewalToken']
+       curr_org_id: responseData['curr_org_id'],
+       api_key: responseData['api_key'],
      );
    }
 }
