@@ -3,7 +3,7 @@ class User {
    String lastname;
    String email;
    String phone;
-   int curr_org_id;
+   String curr_org_id;
    String api_key;
 
 

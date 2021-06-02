@@ -44,7 +44,7 @@ class AuthProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = json.decode(response.body);
 
-      var userData = responseData['data'];
+      var userData = responseData['data']['user'];
       User authUser = User.fromJson(userData);
 
       UserPreferences().saveUser(authUser);

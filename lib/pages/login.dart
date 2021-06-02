@@ -1,9 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myflutter/foundation.dart';
+import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+
+
   @override
+_LoginState createState() => _LoginState();
+
   Widget build(BuildContext context) {
+    String _email, _password;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -52,8 +60,21 @@ class LoginPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   child: Column(
                     children: <Widget>[
-                      InputFile(label: "Email"),
-                      InputFile(label: "Password", obscureText: true)
+                    TextFormField(
+                        autofocus: false,
+                        validator: (value) => value.isEmpty ? "Please enter emai" : null,
+                        onSaved: (value) => _email = value.toString(),
+                        decoration: InputDecoration("Check email", Icons.email),
+
+                      ),
+                      TextFormField(
+                        autofocus: false,
+                        obscureText: true,
+                        validator: (value) => value!.isEmpty ? null :  "Please enter password" ,
+                        onSaved: (value) => _password = value.toString(),
+                        decoration: InputDecoration("Confirm password", Icons.lock),
+
+                      )
 
                   ],
                   ),
@@ -154,6 +175,25 @@ class LoginPage extends StatelessWidget {
          SizedBox(height: 10,),
        ],
      );
+  }
+}
+
+class _LoginState extends State<LoginPage> {
+
+  final formKey = new GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    AuthProvider auth = Provider.of<AuthProvider>(context);
+
+    var loading = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        CircularProgressIndicator(),
+        Text("Authenticating ... Please Wait")
+      ],
+    );
+
   }
 }
 
