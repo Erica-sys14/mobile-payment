@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:myflutter/foundation.dart';
 import 'package:myflutter/pages/login.dart';
@@ -6,16 +5,10 @@ import 'package:myflutter/pages/welcome.dart';
 import 'package:myflutter/shared_preferences.dart';
 import 'package:myflutter/util/share_preference.dart';
 import 'package:provider/provider.dart';
-
 import 'domains/user.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: MyApp(),
-    routes: <String, WidgetBuilder> {
-      '/login': (BuildContext context) => LoginPage(),
-  },
-  ));
+  runApp(MaterialApp());
 }
 
 class MyApp extends StatelessWidget{
@@ -23,6 +16,7 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     Future<User> getUserData() => UserPreferences().getUser();
+
 
     return MultiProvider(
         providers: [
@@ -41,7 +35,9 @@ class MyApp extends StatelessWidget{
             default:
               if (snapshot.hasError)
                 return Text('Error:${snapshot.error}');
-              else if (snapshot.data.api_key == null) {
+              else
+
+ if (snapshot.data == null) {
                 return LoginPage();
               } else {
                 UserPreferences().removeUser();

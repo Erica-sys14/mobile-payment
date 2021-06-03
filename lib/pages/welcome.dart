@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myflutter/shared_preferences.dart';
-import 'package:provider/provider.dart';
-import 'package:myflutter/domains/user.dart';
-
 import 'login.dart';
 
 class Welcome extends StatelessWidget{
