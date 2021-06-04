@@ -21,13 +21,17 @@ class AuthProvider with ChangeNotifier {
 
   Status get loggedInStatus => _loggedInStatus;
 
+  set loggedStatus(Status value) {
+    _loggedInStatus = value;
+  }
+
   Future<Map<String, dynamic>> login(String email, String password) async {
     var result;
 
     final Map<String, dynamic> loginData = {
       'user': {
-        'email': email,
-        'password': password
+        'email': 'ngoeocke@gmail.com',
+        'password': 'abcd1234'
       }
     };
 
@@ -44,7 +48,10 @@ class AuthProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = json.decode(response.body);
 
+      print(responseData);
+
       var userData = responseData['data']['user'];
+
       User authUser = User.fromJson(userData);
 
       UserPreferences().saveUser(authUser);
@@ -64,5 +71,13 @@ class AuthProvider with ChangeNotifier {
         };
     }
       return result;
+  }
+  static onError(error){
+    print('the error is ${error.detail}');
+    return {
+      'status':false,
+      'message':'Unsuccessful Request',
+      'data':error
+    };
   }
 }

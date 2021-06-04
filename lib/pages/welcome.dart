@@ -9,10 +9,6 @@ class Welcome extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    //Provider.of<UserProvider>(context).setUser(user);
-
-
-
     return Scaffold (
       body: SafeArea(
         child: Container(
