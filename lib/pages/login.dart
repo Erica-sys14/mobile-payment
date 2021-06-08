@@ -3,43 +3,48 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myflutter/domains/user.dart';
 import 'package:myflutter/providers/auth_provider.dart';
-import 'package:myflutter/pages/home.dart';
 import 'package:myflutter/utility/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import '../providers/user_provider.dart';
 
-class LoginPage extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
-_LoginState createState() => _LoginState();
+  _LoginState createState() => _LoginState();
 }
 
-class _LoginState extends State<LoginPage> {
-  final formKey = new GlobalKey<FormState>();
+class _LoginState extends State<Login> {
 
-  late String _email, _password;
+  final formKey = GlobalKey<FormState>();
+
+   late  String _userName, _password;
+
 
   @override
   Widget build(BuildContext context) {
+
     AuthProvider auth = Provider.of<AuthProvider>(context);
 
+    var doLogin = (){
 
-    var doLogin = () {
       final form = formKey.currentState;
-      if (form!.validate()) {
+
+      if(form!.validate()){
+
         form.save();
 
-        final Future<Map<String, dynamic>> successfulMessage =
-        auth.login(_email, _password);
+        final Future<Map<String,dynamic>> Message =  auth.login(_userName,_password);
 
-        successfulMessage.then((response) {
+        Message.then((response) {
           if (response['status']) {
+
             User user = response['user'];
+
             Provider.of<UserProvider>(context, listen: false).setUser(user);
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HomePage()));
+
+            Navigator.pushReplacementNamed(context, '/dashboard');
+
           } else {
             Flushbar(
               title: "Failed Login",
@@ -48,14 +53,18 @@ class _LoginState extends State<LoginPage> {
             ).show(context);
           }
         });
-      } else{
+
+
+      }else{
         Flushbar(
           title: 'Invalid form',
           message: 'Please complete the form properly',
           duration: Duration(seconds: 10),
         ).show(context);
       }
+
     };
+
 
     final loading = Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -65,124 +74,71 @@ class _LoginState extends State<LoginPage> {
       ],
     );
 
-
-      return SafeArea(
-        child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          elevation: 0,
-          brightness: Brightness.light,
-          backgroundColor: Colors.transparent,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back_ios,
-              size: 20,
-              color: Colors.black,),
-
-
-          ),
+    final forgotLabel = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        FlatButton(
+          padding: EdgeInsets.all(0.0),
+          child: Text("Forgot password?",
+              style: TextStyle(fontWeight: FontWeight.w300)),
+          onPressed: () {
+//            Navigator.pushReplacementNamed(context, '/reset-password');
+          },
         ),
+        FlatButton(
+          padding: EdgeInsets.only(left: 0.0),
+          child: Text("Sign up", style: TextStyle(fontWeight: FontWeight.w300)),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/register');
+          },
+        ),
+      ],
+    );
 
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: Text('Login'),),
         body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(40.0),
-          child: Form(
-            key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Text("Login",
-                    style: TextStyle(
-                        fontSize: 30, fontWeight: FontWeight.bold),),
-                  SizedBox(height: 20,),
-                  Text("Login to your account",
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey[700]
-                    ),)
+          child: Container(
+            padding: EdgeInsets.all(40.0),
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 15.0,),
+                  Text("Email"),
+                  SizedBox(height: 5.0,),
+                  TextFormField(
+                    autofocus: false,
+                    validator: (value)=> value!.isEmpty?"Please enter email":null,
+                    onSaved: (value)=> _userName = value!,
+                    decoration: buildInputDecoration('Enter Email',Icons.email),
+                  ),
+                  SizedBox(height: 20.0,),
+                  Text("Password"),
+                  SizedBox(height: 5.0,),
+                  TextFormField(
+                    autofocus: false,
+                    obscureText: true,
+                    validator: (value)=> value!.isEmpty?"Please enter password":null,
+                    onSaved: (value)=> _password = value!,
+                    decoration: buildInputDecoration('Enter Password',Icons.lock),
+                  ),
+                  SizedBox(height: 20.0,),
+                  auth.loggedInStatus == Status.Authenticating
+                      ?loading
+                      : longButtons('Login',doLogin),
+                  SizedBox(height: 8.0,),
+                  forgotLabel
+
                 ],
               ),
-
-              SizedBox(height: 15.0,),
-              Text('Email'),
-              SizedBox(height: 5.0,),
-              TextFormField(
-                autofocus: false,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _email = value.toString(),
-                decoration: InputDecoration(
-                  hintText: 'Enter your email',
-                  prefixIcon: Icon(Icons.email),
-                  prefixIconConstraints: BoxConstraints(
-                    minHeight: 20,
-                    minWidth: 20,
-                  ),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-
-              SizedBox(height: 20.0,),
-              Text('Password'),
-              SizedBox(height: 5.0,),
-              TextFormField(
-                autofocus: false,
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _password = value.toString(),
-                decoration: InputDecoration(
-                  hintText: 'Enter your password',
-                  prefixIcon: Icon(Icons.lock),
-                  prefixIconConstraints: BoxConstraints(
-                    minHeight: 20,
-                    minWidth: 20,
-                  ),
-                  border: OutlineInputBorder(),
-                ),
-
-              ),
-
-              SizedBox(height: 20.0,),
-              auth.loggedInStatus == Status.Authenticating
-                  ?loading
-                  : longButtons('Login',doLogin),
-              SizedBox(height: 8.0,),
-              Container(
-                padding: EdgeInsets.only(bottom: 100),
-                height: 200,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/bord2.png"),
-                      fit: BoxFit.fitHeight
-                  ),
-                ),
-              ),
-
-
-            ],
-          ),
+            ),
           ),
         ),
-        ),
-        ),
-      );
-    }
-
-    // ignore: non_constant_identifier_names
-
+      ),
+    );
   }
+}
 

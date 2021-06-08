@@ -35,7 +35,6 @@ class AuthProvider with ChangeNotifier {
       }
     };
 
-
     _loggedInStatus = Status.Authenticating;
     notifyListeners();
 

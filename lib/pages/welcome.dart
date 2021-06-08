@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'login.dart';
 
-class Welcome extends StatelessWidget{
-  //final User user;
-
-  //Welcome({required this.user});
+class Welcome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold (
       body: SafeArea(
         child: Container(
@@ -59,7 +56,7 @@ class Welcome extends StatelessWidget{
                     minWidth: double.infinity,
                     height: 50,
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                      Navigator.pushReplacementNamed(context, '/login');
                     },
 //Define the shape
                     shape: RoundedRectangleBorder(
@@ -87,3 +84,4 @@ class Welcome extends StatelessWidget{
     );
   }
 }
+

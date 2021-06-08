@@ -32,9 +32,7 @@ class _HomePageState extends State<HomePage> {
           RaisedButton(
             onPressed: () {
               UserPreferences().removeUser();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
+              Navigator.pushReplacementNamed(context, '/login');
             },
             child: Text("Logout"),
             color: Colors.lightBlueAccent,
