@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Center(child: Text('${user.email}')),
           SizedBox(height: 100),
-          RaisedButton(
+          MaterialButton(
             onPressed: () {
               UserPreferences().removeUser();
               Navigator.push(

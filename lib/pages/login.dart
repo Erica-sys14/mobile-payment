@@ -18,7 +18,7 @@ _LoginState createState() => _LoginState();
 class _LoginState extends State<LoginPage> {
   final formKey = new GlobalKey<FormState>();
 
-  late String _email, _password;
+  late String _userName, _password;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,11 @@ class _LoginState extends State<LoginPage> {
 
     var doLogin = () {
       final form = formKey.currentState;
-      if (form!.validate()) {
+      if (form != null && form.validate()) {
         form.save();
 
         final Future<Map<String, dynamic>> successfulMessage =
-        auth.login(_email, _password);
+        auth.login(_userName, _password);
 
         successfulMessage.then((response) {
           if (response['status']) {
@@ -114,22 +114,14 @@ class _LoginState extends State<LoginPage> {
               TextFormField(
                 autofocus: false,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value != null && value.isEmpty) {
                     return 'Please enter your email';
                   }
                   return null;
                 },
-                onSaved: (value) => _email = value.toString(),
-                decoration: InputDecoration(
-                  hintText: 'Enter your email',
-                  prefixIcon: Icon(Icons.email),
-                  prefixIconConstraints: BoxConstraints(
-                    minHeight: 20,
-                    minWidth: 20,
-                  ),
-                  border: OutlineInputBorder(),
+                onSaved: (value) => _userName = value.toString(),
+                decoration: buildInputDecoration('Enter your email', Icons.email),
                 ),
-              ),
 
               SizedBox(height: 20.0,),
               Text('Password'),
@@ -138,28 +130,26 @@ class _LoginState extends State<LoginPage> {
                 autofocus: false,
                 obscureText: true,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value != null && value.isEmpty) {
                     return 'Please enter your password';
                   }
                   return null;
                 },
                 onSaved: (value) => _password = value.toString(),
-                decoration: InputDecoration(
-                  hintText: 'Enter your password',
-                  prefixIcon: Icon(Icons.lock),
-                  prefixIconConstraints: BoxConstraints(
-                    minHeight: 20,
-                    minWidth: 20,
-                  ),
-                  border: OutlineInputBorder(),
-                ),
+                decoration: buildInputDecoration('Enter your password', Icons.lock),
 
               ),
 
               SizedBox(height: 20.0,),
-              auth.loggedInStatus == Status.Authenticating
+              MaterialButton(
+                onPressed: doLogin(),
+                child: Text("Login"),
+                color: Colors.lightBlueAccent,
+              ),
+
+              /*auth.loggedInStatus == Status.Authenticating
                   ?loading
-                  : longButtons('Login',doLogin),
+                  : longButtons('Login',doLogin),*/
               SizedBox(height: 8.0,),
               Container(
                 padding: EdgeInsets.only(bottom: 100),
