@@ -6,6 +6,22 @@ class User {
   String curr_org_id;
   String api_key;
 
+  String get getfirstname {
+    return firstname;
+  }
+
+  String get surname {
+    return lastname;
+  }
+
+  String get mail {
+    return email;
+  }
+
+  String get number {
+    return phone;
+  }
+
 
   User({required this.firstname, required this.lastname, required this.email, required this.phone, required this.curr_org_id, required this.api_key});
 
@@ -19,4 +35,5 @@ class User {
       api_key: responseData['api_key'],
     );
   }
+
 }

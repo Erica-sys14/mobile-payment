@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:myflutter/domains/user.dart';
 import 'package:myflutter/provider/user_provider.dart';
 import 'package:myflutter/utility/shared_preferences.dart';
-import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
 
 import 'login.dart';
 
-
-
-
 class HomePage extends StatefulWidget {
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -18,7 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<UserProvider>(context).user;
+    final user = UserPreferences();
 
     return Scaffold(
       appBar: AppBar(
@@ -30,17 +27,21 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 100,
           ),
-          Center(child: Text('${user.email}')),
+          Center(child: Text(user.getUser().toString())),
           SizedBox(height: 100),
           MaterialButton(
             onPressed: () {
               UserPreferences().removeUser();
-              Navigator.pushNamed(context, '/login');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
+              );
             },
             child: Text("Logout"),
             color: Colors.lightBlueAccent,
           )
         ],
       ),
-    );  }
+    );
+  }
 }

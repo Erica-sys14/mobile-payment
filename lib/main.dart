@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:myflutter/pages/home.dart';
+import 'package:myflutter/pages/welcome.dart';
 import 'package:myflutter/pages/login.dart';
 import 'package:myflutter/pages/welcome.dart';
 import 'package:myflutter/provider/auth_provider.dart';

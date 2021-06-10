@@ -30,8 +30,8 @@ class AuthProvider extends ChangeNotifier {
     var result;
 
     final Map<String, dynamic> loginData = {
-      'UserName': email,
-      'Password': password
+      "email": email,
+      "password": password
     };
 
     _loggedInStatus = Status.Authenticating;
@@ -47,11 +47,7 @@ class AuthProvider extends ChangeNotifier {
 
     if (response.statusCode == 200) {
 
-      final Map<String, dynamic> responseData = json.decode(response.body);
-
-      print(responseData);
-
-      var userData = responseData['Content'];
+      final Map<String, dynamic> userData = json.decode(response.body);
 
       User authUser = User.fromJson(userData);
 
@@ -60,7 +56,11 @@ class AuthProvider extends ChangeNotifier {
       _loggedInStatus = Status.LoggedIn;
       notifyListeners();
 
-      result = {'status': true, 'message': 'Successful', 'user': authUser};
+      result = {
+        'status': true,
+        'message': 'Successful',
+        'user': authUser
+      };
 
     } else {
       _loggedInStatus = Status.NotLoggedIn;
