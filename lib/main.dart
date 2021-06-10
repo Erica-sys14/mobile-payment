@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:myflutter/pages/home.dart';
-import 'package:myflutter/pages/welcome.dart';
-import 'package:myflutter/providers/auth_provider.dart';
 import 'package:myflutter/pages/login.dart';
-import 'package:myflutter/providers/user_provider.dart';
-import 'package:myflutter/util/share_preference.dart';
+import 'package:myflutter/pages/welcome.dart';
+import 'package:myflutter/provider/auth_provider.dart';
+import 'package:myflutter/provider/user_provider.dart';
+import 'package:myflutter/utility/shared_preferences.dart';
+import 'dart:async';
+import 'dart:math';
+
 import 'package:provider/provider.dart';
 import 'domains/user.dart';
 
 void main() {
   runApp(MyApp());
-
 }
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +29,10 @@ class MyApp extends StatelessWidget{
       child:  MaterialApp(
         title: 'Login Registration',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.orange,
         ),
-        home: FutureBuilder(
+        home:
+        FutureBuilder(
             future: getUserData(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
@@ -40,30 +43,20 @@ class MyApp extends StatelessWidget{
                   if (snapshot.hasError)
                     return Text('Error: ${snapshot.error}');
                   else if (snapshot.data == null)
-                    return LoginPage();
+                    return Login();
                   else {
                     UserPreferences().removeUser();
-                    return Welcome();
                   }
-
+                  return Welcome();
 
               }
-
             }),
-          routes: {
-            '/home': (context) => HomePage(),
-            '/login': (context) => LoginPage(),
-
-          }),
-      );
-
+      ),
+    );
 
 
   }
 }
-
-
-
 
 
 

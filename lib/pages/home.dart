@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:myflutter/domains/user.dart';
-import 'package:myflutter/pages/login.dart';
-import 'package:myflutter/providers/user_provider.dart';
-import 'package:myflutter/util/share_preference.dart';
+import 'package:myflutter/provider/user_provider.dart';
+import 'package:myflutter/utility/shared_preferences.dart';
 import 'package:provider/provider.dart';
+
+import 'login.dart';
+
+
 
 
 class HomePage extends StatefulWidget {
@@ -19,7 +22,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("DASHBOARD PAGE"),
+        title: Text("Home"),
         elevation: 0.1,
       ),
       body: Column(
@@ -29,10 +32,10 @@ class _HomePageState extends State<HomePage> {
           ),
           Center(child: Text('${user.email}')),
           SizedBox(height: 100),
-          RaisedButton(
+          MaterialButton(
             onPressed: () {
               UserPreferences().removeUser();
-              Navigator.pushReplacementNamed(context, '/login');
+              Navigator.pushNamed(context, '/login');
             },
             child: Text("Logout"),
             color: Colors.lightBlueAccent,
@@ -41,4 +44,3 @@ class _HomePageState extends State<HomePage> {
       ),
     );  }
 }
-

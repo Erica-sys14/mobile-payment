@@ -26,7 +26,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^5.0.0
+  provider: ^4.3.3
   http: ^0.12.1
   shared_preferences: ^0.5.8
   json_annotation: ^2.0.0
