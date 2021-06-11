@@ -7,25 +7,26 @@ class UserPreferences {
   Future<bool> saveUser(User user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    prefs.setString("firstname", user.firstname);
-    prefs.setString("lastname", user.lastname);
-    prefs.setString("email", user.email);
-    prefs.setString("phone", user.phone);
-    prefs.setString("curr_org_id", user.curr_org_id);
-    prefs.setString("api_key", user.api_key);
-
-    return prefs.commit();
+    prefs.setString('firstname', user.firstname);
+    prefs.setString('lastname', user.lastname);
+    prefs.setString('email', user.email);
+    prefs.setString('phone', user.phone);
+    prefs.setString('curr_org_id', user.curr_org_id);
+    prefs.setString('api_key', user.api_key);
+    var commit =  prefs.commit();
+    debugPrint(user.email);
+    return commit;
   }
 
   Future<User> getUser() async {
     final prefs = await SharedPreferences.getInstance();
 
-    final firstname = prefs.getString("firstname");
-    final lastname = prefs.getString("lastname");
-    final email = prefs.getString("email");
-    final phone = prefs.getString("phone");
-    final currOrgId = prefs.getString("curr_org_id");
-    final apiKey = prefs.getString("api_key");
+    final firstname = prefs.getString('firstname') ?? '';
+    final lastname = prefs.getString('lastname') ?? '';
+    final email = prefs.getString('email') ?? '';
+    final phone = prefs.getString('phone') ?? '';
+    final currOrgId = prefs.getString('curr_org_id') ?? '';
+    final apiKey = prefs.getString('api_key') ?? '';
 
     return User(
         firstname: firstname,

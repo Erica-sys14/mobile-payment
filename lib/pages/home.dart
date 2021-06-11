@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myflutter/domains/user.dart';
 import 'package:myflutter/provider/user_provider.dart';
 import 'package:myflutter/utility/shared_preferences.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
@@ -15,8 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final user = UserPreferences();
-
+    User user = Provider.of<UserProvider>(context).user;
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 100,
           ),
-          Center(child: Text(user.getUser().toString())),
+          Center(child: Text('${user.email}')),
           SizedBox(height: 100),
           MaterialButton(
             onPressed: () {

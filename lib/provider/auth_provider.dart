@@ -30,8 +30,8 @@ class AuthProvider extends ChangeNotifier {
     var result;
 
     final Map<String, dynamic> loginData = {
-      "email": email,
-      "password": password
+      'email': email,
+      'password': password
     };
 
     _loggedInStatus = Status.Authenticating;
@@ -50,8 +50,10 @@ class AuthProvider extends ChangeNotifier {
       final Map<String, dynamic> userData = json.decode(response.body);
 
       User authUser = User.fromJson(userData);
-
+      debugPrint('content');
       UserPreferences().saveUser(authUser);
+      debugPrint(userData.toString());
+      debugPrint(authUser.toString());
 
       _loggedInStatus = Status.LoggedIn;
       notifyListeners();

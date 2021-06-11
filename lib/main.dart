@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
                   return CircularProgressIndicator();
                 default:
                   if (snapshot.hasError)
-                    return Text('Error: ${snapshot.error}');
+                    return Text("${snapshot.error}");
                   else if (snapshot.data == null)
                     return Login();
                   else {

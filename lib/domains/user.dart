@@ -6,19 +6,19 @@ class User {
   String curr_org_id;
   String api_key;
 
-  String get getfirstname {
+ String get getfirstname {
     return firstname;
   }
 
-  String get surname {
+  String get getlastname {
     return lastname;
   }
 
-  String get mail {
+  String get getemail {
     return email;
   }
 
-  String get number {
+  String get getphone {
     return phone;
   }
 
