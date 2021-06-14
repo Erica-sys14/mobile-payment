@@ -3,7 +3,7 @@ import 'package:myflutter/domains/user.dart';
 
 
 class UserProvider with ChangeNotifier {
-  User _user = new User(curr_org_id: 'curr_org_id', lastname: 'lastname', firstname: 'firstname', api_key: 'api_key', phone: 'phone', email: 'email',);
+  var _user;
 
   User get user => _user;
 

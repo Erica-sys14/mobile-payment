@@ -16,7 +16,7 @@ enum Status {
   LoggedOut
 }
 
-class AuthProvider extends ChangeNotifier {
+class   AuthProvider extends ChangeNotifier {
   Status _loggedInStatus = Status.NotLoggedIn;
   Status _registeredInStatus = Status.NotRegistered;
 
@@ -41,19 +41,16 @@ class AuthProvider extends ChangeNotifier {
       AppUrl.login,
       body: json.encode(loginData),
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
     );
 
     if (response.statusCode == 200) {
 
       final Map<String, dynamic> userData = json.decode(response.body);
-
-      User authUser = User.fromJson(userData);
-      debugPrint('content');
+     // Ici on
+      User authUser = User.fromJson(userData['data']['user']);
       UserPreferences().saveUser(authUser);
-      debugPrint(userData.toString());
-      debugPrint(authUser.toString());
 
       _loggedInStatus = Status.LoggedIn;
       notifyListeners();

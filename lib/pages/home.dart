@@ -27,7 +27,9 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 100,
           ),
-          Center(child: Text('${user.email}')),
+          Center(
+              child: Text('${user.email} \n ${user.api_key}')
+          ),
           SizedBox(height: 100),
           MaterialButton(
             onPressed: () {

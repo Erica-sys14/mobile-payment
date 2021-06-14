@@ -1,15 +1,17 @@
+import 'package:flutter/cupertino.dart';
+
 class User {
-  String firstname;
-  String lastname;
+  String first_name;
+  String last_name;
   String email;
-  String phone;
-  String curr_org_id;
+  int telephone;
+  int curr_org_id;
   String api_key;
 
- String get getfirstname {
-    return firstname;
+ int get get_curr_org_id {
+    return this.curr_org_id;
   }
-
+/*
   String get getlastname {
     return lastname;
   }
@@ -20,19 +22,25 @@ class User {
 
   String get getphone {
     return phone;
-  }
+  }*/
 
-
-  User({required this.firstname, required this.lastname, required this.email, required this.phone, required this.curr_org_id, required this.api_key});
+  User(
+    this.first_name,
+    this.last_name,
+    this.email,
+    this.telephone,
+    this.curr_org_id,
+    this.api_key
+  );
 
   factory User.fromJson(Map<String, dynamic> responseData) {
     return User(
-      firstname: responseData['firstname'],
-      lastname: responseData['lastname'],
-      email: responseData['email'],
-      phone: responseData['phone'],
-      curr_org_id: responseData['curr_org_id'],
-      api_key: responseData['api_key'],
+      responseData['first_name'],
+      responseData['last_name'],
+      responseData['email'],
+      responseData['telephone'],
+      responseData['curr_org_id'],
+      responseData['api_key'],
     );
   }
 
