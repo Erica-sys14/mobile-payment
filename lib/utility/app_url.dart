@@ -4,6 +4,6 @@ class AppUrl {
 
   static const String baseURL = localBaseURL;
   static const String login = baseURL + "mobile-login";
-  static const String forgotPassword = "";
+  static const String articles = baseURL + "all-articles?per_page=100";
 
 }

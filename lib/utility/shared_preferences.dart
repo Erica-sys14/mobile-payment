@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:myflutter/domains/user.dart';
+import 'package:myflutter/domains/article.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
 class UserPreferences {
+
+
   Future<bool> saveUser(User user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -42,8 +45,10 @@ class UserPreferences {
     prefs.remove("curr_org_id");
     prefs.remove("api_key");
   }
-  Future<String> getapi_Key(args) async {
+  Future<String> getapi_Key() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString("api_key");
   }
 }
+
+

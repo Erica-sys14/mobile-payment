@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:myflutter/domains/article.dart';
 
 import 'package:myflutter/pages/home.dart';
 import 'package:myflutter/pages/welcome.dart';
 import 'package:myflutter/pages/login.dart';
 import 'package:myflutter/pages/welcome.dart';
+import 'package:myflutter/provider/article_provider.dart';
 import 'package:myflutter/provider/auth_provider.dart';
 import 'package:myflutter/provider/user_provider.dart';
 import 'package:myflutter/utility/shared_preferences.dart';
@@ -14,35 +16,8 @@ import 'package:provider/provider.dart';
 import 'domains/user.dart';
 
 void main() {
-  runApp(MyApp(
-  ));
+  runApp(MyApp());
 }
-
-class l extends StatelessWidget {
-  const ({Key key, required this.items}) : super(key: key);
-  class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-  return MaterialApp(
-  debugShowCheckedModeBanner: false,
-  title: 'ListViews',
-  theme: ThemeData(
-  primarySwatch: Colors.teal,
-  ),
-  home: Scaffold(
-  appBar: AppBar(title: Text('ListViews')),
-  body: BodyLayout(),
-  ),
-  );
-  }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
 
 class MyApp extends StatelessWidget {
 
@@ -53,7 +28,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_)=> AuthProvider()),
-        ChangeNotifierProvider(create: (_)=>UserProvider())
+        ChangeNotifierProvider(create: (_)=>UserProvider()),
+        ChangeNotifierProvider(create: (_)=>ArticleProvider())
       ],
       child:  MaterialApp(
         title: 'Login Registration',
