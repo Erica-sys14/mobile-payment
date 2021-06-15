@@ -8,42 +8,13 @@ import 'dart:async';
 
 import 'login.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
+class HomePage extends StatelessWidget {
 
-class _HomePageState extends State<HomePage> {
+
+  final items = List<String>.generate(10000, (i) => 'Items $i');
+
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<UserProvider>(context).user;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Home"),
-        elevation: 0.1,
-      ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 100,
-          ),
-          Center(
-              child: Text('${user.email} \n ${user.api_key}')
-          ),
-          SizedBox(height: 100),
-          MaterialButton(
-            onPressed: () {
-              UserPreferences().removeUser();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Login()),
-              );
-            },
-            child: Text("Logout"),
-            color: Colors.lightBlueAccent,
-          )
-        ],
-      ),
-    );
+    return Container();
   }
 }

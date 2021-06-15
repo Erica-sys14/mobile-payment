@@ -14,8 +14,35 @@ import 'package:provider/provider.dart';
 import 'domains/user.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyApp(
+  ));
 }
+
+class l extends StatelessWidget {
+  const ({Key key, required this.items}) : super(key: key);
+  class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+  return MaterialApp(
+  debugShowCheckedModeBanner: false,
+  title: 'ListViews',
+  theme: ThemeData(
+  primarySwatch: Colors.teal,
+  ),
+  home: Scaffold(
+  appBar: AppBar(title: Text('ListViews')),
+  body: BodyLayout(),
+  ),
+  );
+  }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
 
 class MyApp extends StatelessWidget {
 
