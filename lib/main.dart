@@ -5,6 +5,7 @@ import 'package:myflutter/pages/home.dart';
 import 'package:myflutter/pages/welcome.dart';
 import 'package:myflutter/pages/login.dart';
 import 'package:myflutter/pages/welcome.dart';
+import 'package:myflutter/provider/add_provider.dart';
 import 'package:myflutter/provider/article_provider.dart';
 import 'package:myflutter/provider/auth_provider.dart';
 import 'package:myflutter/provider/user_provider.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_)=> AuthProvider()),
         ChangeNotifierProvider(create: (_)=>UserProvider()),
-        ChangeNotifierProvider(create: (_)=>ArticleProvider())
+        ChangeNotifierProvider(create: (_)=>ArtProvider())
       ],
       child:  MaterialApp(
         title: 'Login Registration',

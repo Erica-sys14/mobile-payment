@@ -18,11 +18,11 @@ class User {
 
   String get getemail {
     return email;
-  }
-
-  String get getphone {
-    return phone;
   }*/
+
+  String get getapikey {
+    return api_key;
+  }
 
   User(
     this.first_name,
