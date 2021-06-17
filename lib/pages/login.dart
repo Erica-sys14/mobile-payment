@@ -71,6 +71,18 @@ class _LoginState extends State<Login> {
 
 
     return Scaffold(
+      appBar: AppBar(
+      title: Text(
+        'Login',
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 14,
+          color: Colors.black,
+        ),
+
+
+      ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(40.0),
