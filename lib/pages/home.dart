@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     debugPrint(this.userData);
     this.userData = Provider.of<ArtProvider>(context).list();
-
+    debugPrint(Provider.of<ArtProvider>(context).list().toString());
     final title = 'Liste d\'articles';
 
     return MaterialApp(
