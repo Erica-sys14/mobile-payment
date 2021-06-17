@@ -35,10 +35,10 @@ class MyApp extends StatelessWidget {
       child:  MaterialApp(
         title: 'Login Registration',
         theme: ThemeData(
-          primarySwatch: Colors.orange,
+          primarySwatch: Colors.blue,
         ),
-        home:
-        FutureBuilder(
+        home:Center(
+        child: FutureBuilder(
             future: getUserData(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
@@ -56,7 +56,10 @@ class MyApp extends StatelessWidget {
                   return Welcome();
 
               }
-            }),
+            },
+            ),
+
+        )
       ),
     );
 

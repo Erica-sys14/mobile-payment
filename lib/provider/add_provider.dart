@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class ArtProvider extends ChangeNotifier {
-  Future<Map<String, dynamic>> list() async {
+  Future <Map<String, dynamic>> list() async {
     final prefs = await SharedPreferences.getInstance();
     Response response = await get(
       AppUrl.articles,
@@ -18,13 +18,24 @@ class ArtProvider extends ChangeNotifier {
       },
     );
 
+
     var result;
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> userData = json.decode(response.body);
-      return userData['data'].tolist();
-      //Article addArticle = Article.fromJson(userData['data']['data']);
+      //Article _article = Article.fromJson(userData['data']['data']);
+
+      result = {
+        'status': true,
+        'message': 'Successful',
+        'data': userData
+      };
     }
+
     return result;
   }
 }
+
+/*
+void
+ */

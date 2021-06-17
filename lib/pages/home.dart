@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:myflutter/domains/article.dart';
 import 'package:myflutter/provider/add_provider.dart';
@@ -12,14 +14,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Article> items = [];
-  var userData;
+
+   late List items = [];
+   var _article;
+
+   @override
+   void initState() {
+     // TODO: implement initState
+     super.initState();
+
+   }
+
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(this.userData);
-    this.userData = Provider.of<ArtProvider>(context).list();
-    debugPrint(Provider.of<ArtProvider>(context).list().toString());
+    final Future<Map<String, dynamic>> succesfulmessage = Provider.of<ArtProvider>(context).list();
+    succesfulmessage.then((response) {
+        setState(() { _article = response['data']['data']; });
+        debugPrint("before value article " + _article.toString());
+    });
+    debugPrint("after value article " + _article.toString());
+
     final title = 'Liste d\'articles';
 
     return MaterialApp(
@@ -31,8 +46,9 @@ class _HomePageState extends State<HomePage> {
         body: ListView.builder(
             itemCount: items.length,
           itemBuilder: (context, index) {
+
             return ListTile(
-              title: Text(userData),
+              title: Text(_article[index])
             );
 
           },
