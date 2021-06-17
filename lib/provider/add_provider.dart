@@ -22,7 +22,7 @@ class ArtProvider extends ChangeNotifier {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> userData = json.decode(response.body);
-      return userData['data']['data'].tolist();
+      return userData['data'].tolist();
       //Article addArticle = Article.fromJson(userData['data']['data']);
     }
     return result;
