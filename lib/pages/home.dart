@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
+   late Future<Article> list;
    late List items = [];
    var _article;
 
@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
    void initState() {
      // TODO: implement initState
      super.initState();
+     list = list;
 
    }
 
