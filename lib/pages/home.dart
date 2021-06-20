@@ -1,12 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:myflutter/domains/article.dart';
-import 'package:myflutter/provider/add_provider.dart';
+import 'package:myflutter/provider/article_provider.dart';
+import 'package:myflutter/provider/article_provider.dart';
+import 'package:myflutter/utility/app_url.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
-import 'login.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,50 +17,77 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   late Future<Article> list;
-   late List items = [];
-   var _article;
 
-   @override
-   void initState() {
-     // TODO: implement initState
-     super.initState();
-     list = list;
-
-   }
-
+  late Future<Article> list;
+  late List items = [];
+  var _article;
 
   @override
-  Widget build(BuildContext context) {
-    final Future<Map<String, dynamic>> succesfulmessage = Provider.of<ArtProvider>(context).list();
-    succesfulmessage.then((response) {
-        setState(() { _article = response['data']['data']; });
-        debugPrint("before value article " + _article.toString());
-    });
-    debugPrint("after value article " + _article.toString());
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    list = list;
 
-    final title = 'Liste d\'articles';
+    late Future<Article> _articles;
 
-    return MaterialApp(
+    @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+
+      /*setState(() {
+      items = _articles;
+    });*/
+      // _list = list();
+
+
+    }
+
+
+    @override
+    Widget build(BuildContext context) {
+      _articles = Provider.of<ArticleProvider>(context).list();
+      /*succesfulmessage.then((response) {
+      Article _article = response;
+      debugPrint("before value article " + _article.toString());
+    });*/
+      debugPrint("after value article " + _articles.toString());
+
+      final title = 'Liste d\'articles';
+
+      return MaterialApp(
         title: title,
-       home: Scaffold(
-         appBar: AppBar(
-          title: Text(title),
-       ),
-        body: ListView.builder(
-            itemCount: items.length,
-          itemBuilder: (context, index) {
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text(title),
+          ),
+          body: Center(
+            child: FutureBuilder<Article>(
+              future: _articles,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      itemCount: snapshot.data!.article.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                              '${snapshot.data!.article[index]['name']}'),
+                        );
+                      });
+                }
+                else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
 
-            return ListTile(
-              title: Text(_article[index])
-            );
-
-          },
+                // By default, show a loading spinner.
+                return CircularProgressIndicator();
+              },
+            ),
+          ),
         ),
-       ),
-    );
+      );
+    }
   }
-}
 
 // class HomePage extends StatelessWidget {
 //
@@ -101,4 +131,6 @@ class _HomePageState extends State<HomePage> {
 //            ),
 //         );
 //   }
-// }
+
+
+}
