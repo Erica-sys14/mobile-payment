@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myflutter/pages/menu.dart';
 import 'login.dart';
 
 class Welcome extends StatelessWidget {
@@ -58,7 +59,7 @@ class Welcome extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Login()),
+                        MaterialPageRoute(builder: (context) => MenuNavbar()),
                       );
                     },
 //Define the shape

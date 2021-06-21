@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:myflutter/domains/article.dart';
 
 import 'package:myflutter/pages/home.dart';
+import 'package:myflutter/pages/menu.dart';
 import 'package:myflutter/pages/welcome.dart';
 import 'package:myflutter/pages/login.dart';
 import 'package:myflutter/pages/welcome.dart';
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
                   if (snapshot.hasError)
                     return Text("${snapshot.error}");
                   else if (snapshot.data == null)
-                    return Login();
+                    return MenuNavbar();
                   else {
                     UserPreferences().removeUser();
                     return Welcome();
@@ -73,7 +74,6 @@ class MyApp extends StatelessWidget {
 
         ),
       );
-    );
 
   }
 

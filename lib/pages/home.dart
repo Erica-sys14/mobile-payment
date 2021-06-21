@@ -21,14 +21,7 @@ class _HomePageState extends State<HomePage> {
   late Future<Article> list;
   late List items = [];
   var _article;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    list = list;
-
-    late Future<Article> _articles;
+  late Future<Article> _articles;
 
     @override
     void initState() {
@@ -133,4 +126,3 @@ class _HomePageState extends State<HomePage> {
 //   }
 
 
-}
