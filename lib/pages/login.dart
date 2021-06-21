@@ -4,6 +4,7 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:myflutter/domains/user.dart';
+import 'package:myflutter/pages/menu.dart';
 import 'package:myflutter/provider/auth_provider.dart';
 import 'package:myflutter/provider/user_provider.dart';
 import 'package:myflutter/utility/widgets.dart';
@@ -39,7 +40,7 @@ class _LoginState extends State<Login> {
             Provider.of<UserProvider>(context, listen: false).setUser(user);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(builder: (context) => MenuNavbar()),
             );
           } else {
             Flushbar(

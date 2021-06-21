@@ -24,7 +24,7 @@ class Dashboard extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.white
+
 
                         ),
 
@@ -36,7 +36,6 @@ class Dashboard extends StatelessWidget {
                         "Thank you to join our mobile payment platform",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.white,
                           fontSize: 15,
 
                         ),

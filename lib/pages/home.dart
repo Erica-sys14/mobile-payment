@@ -54,10 +54,12 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(
             title: Text(title),
           ),
-          body: Center(
+          body:
+          Center(
             child: FutureBuilder<Article>(
               future: _articles,
               builder: (context, snapshot) {
+                debugPrint('ok');
                 if (snapshot.hasData) {
                   return ListView.builder(
                       itemCount: snapshot.data!.article.length,

@@ -12,7 +12,7 @@ class Article {
       this.article
       );
 
-  factory Article.fromJson(List<dynamic> responseData) {
+factory Article.fromJson(List<dynamic> responseData) {
     return Article(
       responseData
     );

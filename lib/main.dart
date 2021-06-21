@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
                   if (snapshot.hasError)
                     return Text("${snapshot.error}");
                   else if (snapshot.data == null)
-                    return MenuNavbar();
+                    return Login();
                   else {
                     UserPreferences().removeUser();
                     return Welcome();

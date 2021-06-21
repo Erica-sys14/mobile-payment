@@ -59,7 +59,7 @@ class Welcome extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MenuNavbar()),
+                        MaterialPageRoute(builder: (context) => Login()),
                       );
                     },
 //Define the shape

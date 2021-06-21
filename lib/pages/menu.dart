@@ -51,14 +51,14 @@ class _MenuNavbarState extends State<MenuNavbar> {
       bottomNavigationBar: CurvedNavigationBar(
         index: pageIndex,
         items: <Widget>[
-          Icon(Icons.dashboard_customize_outlined, size: 20,color: Colors.white,),
-          Icon(Icons.shopping_bag_outlined, size: 20,color: Colors.white,),
-          Icon(Icons.credit_card, size: 20,color: Colors.white,),
-          Icon(Icons.perm_identity_outlined, size: 20,color: Colors.white,)
+          Icon(Icons.dashboard_customize_outlined, size: 25,color: Colors.white,),
+          Icon(Icons.shopping_bag_outlined, size: 25,color: Colors.white,),
+          Icon(Icons.credit_card, size: 25,color: Colors.white,),
+          Icon(Icons.perm_identity_outlined, size: 25,color: Colors.white,)
         ],
-        color: Colors.grey,
+        color: Colors.lightBlue,
         buttonBackgroundColor: Colors.lightBlue,
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.white,
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),
         onTap: (int tappedIndex) {
