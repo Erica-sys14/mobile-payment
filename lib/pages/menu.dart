@@ -17,7 +17,7 @@ class _MenuNavbarState extends State<MenuNavbar> {
   int pageIndex = 0;
 
   final Dashboard _dashboard = Dashboard();
-  final Articles _article = Articles();
+  final Articles _articlee = Articles();
   final Paiement _paiement = Paiement();
   final Profil _profil = Profil();
 
@@ -29,7 +29,7 @@ class _MenuNavbarState extends State<MenuNavbar> {
         return _dashboard;
         break;
       case 1:
-        return _article;
+        return _articlee;
         break;
       case 2:
         return _paiement;
@@ -48,7 +48,8 @@ class _MenuNavbarState extends State<MenuNavbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
+      bottomNavigationBar:
+      CurvedNavigationBar(
         index: pageIndex,
         items: <Widget>[
           Icon(Icons.dashboard_customize_outlined, size: 25,color: Colors.white,),
@@ -74,7 +75,9 @@ class _MenuNavbarState extends State<MenuNavbar> {
           // child: Text(_page.toString(), textScaleFactor: 10.0,),
           child: _showPage,
         ),
+
       ),
+
     );
   }
 }

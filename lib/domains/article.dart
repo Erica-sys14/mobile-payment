@@ -1,9 +1,5 @@
 class Article {
-  /*final String name;
-  final String description;
-  final int is_rate;
-  final int check_stored;
-  final String create_at;*/
+  /**/
   final List <dynamic> article;
 
 
@@ -20,3 +16,39 @@ factory Article.fromJson(List<dynamic> responseData) {
 
 
 }
+
+
+/*
+class Create_article {
+  String name;
+  String description;
+  int is_rate;
+  int check_stored;
+  String create_at;
+  int pu_ht;
+  int pu_ht_custom;
+
+  Create_article (
+      this.name,
+      this.description,
+      this.is_rate,
+      this.check_stored,
+      this.create_at,
+      this.pu_ht,
+      this.pu_ht_custom,
+
+      );
+
+  factory Create_article.fromJson(Map<String, dynamic> jsonData) {
+    return Create_article(
+      jsonData['name'],
+      jsonData['description'],
+      jsonData['is_rate'],
+      jsonData['check_stored'],
+      jsonData['create_at'],
+      jsonData['pu_ht'],
+      jsonData['pu_ht_custom'],
+
+    );
+  }
+}*/

@@ -69,6 +69,15 @@ class _ArticlesState extends State<Articles> {
                       return ListTile(
                         title: Text(
                             '${snapshot.data!.article[index]['name']}'),
+                        trailing: IconButton(
+                          icon: Icon(Icons.more_vert),
+                          onPressed: () {
+                            ListView.builder(itemBuilder: (context, index) {
+
+                            });
+                          },
+
+                        ),
                       );
                     });
               }
