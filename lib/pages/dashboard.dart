@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:myflutter/domains/user.dart';
+import 'package:myflutter/provider/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class Dashboard extends StatelessWidget {
-  const Dashboard({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<UserProvider>(context).user;
+
     return Scaffold (
       body: SafeArea(
         child: Center(
@@ -20,7 +25,7 @@ class Dashboard extends StatelessWidget {
                   Column(
                     children: <Widget>[
                       Text(
-                        "Welcome to nexah Erica",
+                        'Welcome to nexah ${user.first_name}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
