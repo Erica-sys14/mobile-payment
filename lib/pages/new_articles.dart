@@ -24,13 +24,17 @@ class _New_ArticlesState extends State<New_Articles> {
 
     var doSave = () {
       final form = formKey.currentState;
-      if (form != null && form.validate()) {
+      if (form != null && form.validate()){
         form.save();
 
         final Future<Map<String, dynamic>> art = add.create(_name, _details, _is_rate, _check_stored, _pu_ht,_pu_th_custom);
         art.then((response){
 
           if (response['status']){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Articles()),
+            );
             debugPrint('true');
             return true;
           }
@@ -52,6 +56,16 @@ class _New_ArticlesState extends State<New_Articles> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Articles()));
+          },
+          icon: Icon(Icons.arrow_back_ios,
+            color: Colors.black87,
+            size: 25,),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -89,7 +103,7 @@ class _New_ArticlesState extends State<New_Articles> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.red),
+                          borderSide: BorderSide(color: Colors.blueAccent),
                         ),
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                       ),
@@ -113,7 +127,7 @@ class _New_ArticlesState extends State<New_Articles> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.red),
+                          borderSide: BorderSide(color: Colors.blueAccent),
                         ),
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                       ),
@@ -136,7 +150,7 @@ class _New_ArticlesState extends State<New_Articles> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.red),
+                          borderSide: BorderSide(color: Colors.blueAccent),
                         ),
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                       ),
@@ -159,7 +173,7 @@ class _New_ArticlesState extends State<New_Articles> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.red),
+                          borderSide: BorderSide(color: Colors.blueAccent),
                         ),
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                       ),
@@ -182,7 +196,7 @@ class _New_ArticlesState extends State<New_Articles> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.red),
+                          borderSide: BorderSide(color: Colors.blueAccent),
                         ),
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                       ),
@@ -204,7 +218,7 @@ class _New_ArticlesState extends State<New_Articles> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.red),
+                          borderSide: BorderSide(color: Colors.blueAccent),
                         ),
                         floatingLabelBehavior: FloatingLabelBehavior.auto,
                       ),

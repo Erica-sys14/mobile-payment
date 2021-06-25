@@ -1,4 +1,7 @@
+import 'dart:async';
+import 'dart:async';
 import 'dart:convert';
+import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:myflutter/domains/article.dart';
@@ -30,7 +33,9 @@ class ArticleProvider extends ChangeNotifier {
     return result;
   }
 
-  Future<Map<String, dynamic>> create(name, description, is_rate, check_stored, pu_ht, pu_ht_custom) async {
+
+  Future<Map<String, dynamic>> create(name, description, is_rate, check_stored,
+      pu_ht, pu_ht_custom) async {
     final prefs = await SharedPreferences.getInstance();
     final Map<String, dynamic> saveData = {
       'name': name,
@@ -51,7 +56,6 @@ class ArticleProvider extends ChangeNotifier {
       },
     );
 
-    debugPrint(AppUrl.article_store.toString());
 
     var result;
 
@@ -60,9 +64,36 @@ class ArticleProvider extends ChangeNotifier {
         'status': true,
       };
     }
-    result =  {
+    result = {
       'status': false,
     };
     return result;
   }
+
+  Future<Map<String, dynamic>>clear(article_id) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    Response response = await delete(
+      AppUrl.article_delete+article_id,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': prefs.getString("api_key")
+      },
+    );
+
+    var result;
+
+    if (response.statusCode == 200) {
+      return result = {
+        'status': true,
+      };
+    }
+    result = {
+      'status': false,
+    };
+    return result;
+  }
+
 }
+
+

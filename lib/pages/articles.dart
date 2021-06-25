@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:myflutter/domains/article.dart';
+import 'package:myflutter/pages/menu.dart';
 import 'package:myflutter/pages/new_articles.dart';
 import 'package:myflutter/provider/article_provider.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,7 @@ class Articles extends StatefulWidget {
 class _ArticlesState extends State<Articles> {
   late Future<Article> list;
   late List items = [];
-  var _article;
+  var _provider;
   late Future<Article> _articles;
 
   @override
@@ -34,9 +35,9 @@ class _ArticlesState extends State<Articles> {
 
   @override
   Widget build(BuildContext context) {
-    _articles = Provider.of<ArticleProvider>(context).list();
+    _provider = Provider.of<ArticleProvider>(context);
+    _articles = _provider.list();
 
-    debugPrint(_articles.toString());
     return MaterialApp(
       home: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -66,19 +67,35 @@ class _ArticlesState extends State<Articles> {
                 return ListView.builder(
                     itemCount: snapshot.data!.article.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                            '${snapshot.data!.article[index]['name']}'),
-                        trailing: IconButton(
-                          icon: Icon(Icons.more_vert),
-                          onPressed: () {
-                            ListView.builder(itemBuilder: (context, index) {
+                      return  ListTile(
+                        title: Text('${snapshot.data!.article[index]['name']}'),
+                        trailing:
+                        PopupMenuButton<int>(
+                            color: Colors.white,
+                            elevation: 10,
+                            onSelected: (items) => SelectItems(context, items, '${snapshot.data!.article[index]['id']}'),
+                            icon: Icon(Icons.more_vert, size: 25, color: Colors.grey,),
+                            itemBuilder: (context) => <PopupMenuEntry<int>>[
+                              PopupMenuItem<int>(
+                                value: 0,
+                                child: Text('Supprimer'),
+                              ),
+                            ]),
+                        /*
 
-                            });
-                          },
+                        */);
 
-                        ),
-                      );
+                      /*  Dismissible(
+                        key: Key(snapshot.data!.article[index]['id'].toString()),
+                        onDismissed: (DismissDirection direction){
+                          setState(() {
+                            snapshot.data!.article[index]['name'].removeAt(index);
+
+                          });
+                        },
+                        child:
+
+                       );*/
                     });
               }
               else if (snapshot.hasError) {
@@ -91,8 +108,37 @@ class _ArticlesState extends State<Articles> {
           ),
         ),
       ),
-    );  }
+    );
+  }
+
+  SelectItems(BuildContext context, int items, String article_id) {
+    switch (items) {
+      case 0:
+        Delete(article_id);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Articles()),
+        );
+        break;
+    }
+  }
+
+  Delete(String article_id) {
+      final Future<Map<String, dynamic>> art = _provider.clear(article_id);
+      art.then((response){
+        var reponse = response['status'];
+        if (reponse){
+          print("Article Supprimé");
+          debugPrint(reponse.toString());
+          return true;
+        }
+        else {
+          print("Article Non Supprimé");
+          debugPrint("false");
+          return false;
+        }
+
+      });
+  }
 }
-
-
 
