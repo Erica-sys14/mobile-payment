@@ -72,33 +72,32 @@ class _LoginState extends State<Login> {
 
 
     return Scaffold(
-      appBar: AppBar(
-      title: Text(
-        'Login',
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 14,
-          color: Colors.black,
-        ),
-
-
-      ),
-      ),
-      body: SingleChildScrollView(
+      body:SafeArea(
         child: Container(
-          padding: EdgeInsets.all(40.0),
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height,
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 40,),
+            child: SingleChildScrollView(
           child: Form(
             key: formKey,
                 child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Column(
                 children: <Widget>[
                   Text("Login",
-                    style: TextStyle(
+                    textAlign: TextAlign.center,
+                    style: TextStyle( color: Colors.grey,
+                        fontSize: 16, fontWeight: FontWeight.bold),),
+                  SizedBox(height: 50,),
+                  Text("Welcome Back",
+                    textAlign: TextAlign.center,
+                    style: TextStyle( fontFamily: 'Montserrat',
                         fontSize: 30, fontWeight: FontWeight.bold),),
                   SizedBox(height: 20,),
-                  Text("Login to your account",
+                  Text("Login with your email and password \n or continue with Nexah Billing",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 15,
                         color: Colors.grey[700]
@@ -106,9 +105,7 @@ class _LoginState extends State<Login> {
                 ],
               ),
 
-              SizedBox(height: 15.0,),
-              Text('Email'),
-              SizedBox(height: 5.0,),
+              SizedBox(height: 40.0,),
               TextFormField(
                 autofocus: false,
                 validator: (value) {
@@ -118,12 +115,26 @@ class _LoginState extends State<Login> {
                   return null;
                 },
                 onSaved: (value) => _userName = value.toString(),
-                decoration: buildInputDecoration('Enter your email', Icons.email),
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                 /* prefix: Icon(Icons.email_outlined, size: 24,),*/
+                  labelText: "Pu_ht_custom",
+                  labelStyle: TextStyle(fontSize: 12,color: Colors.grey[700],fontWeight: FontWeight.w600),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: BorderSide(color: Colors.grey),
+                  ),
+                  suffix: Icon(Icons.lock_outline, size: 24,),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    borderSide: BorderSide(color: Colors.blueAccent),
+                  ),
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
+
+                ),
                 ),
 
               SizedBox(height: 20.0,),
-              Text('Password'),
-              SizedBox(height: 5.0,),
               TextFormField(
                 autofocus: false,
                 obscureText: true,
@@ -134,11 +145,25 @@ class _LoginState extends State<Login> {
                   return null;
                 },
                 onSaved: (value) => _password = value.toString(),
-                decoration: buildInputDecoration('Enter your password', Icons.lock),
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    labelText: "Pu_ht_custom",
+                    labelStyle: TextStyle(fontSize: 14,color: Colors.grey[700],fontWeight: FontWeight.w600),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    suffix: Icon(Icons.lock_outline, size: 24,),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      borderSide: BorderSide(color: Colors.blueAccent),
+                    ),
+                    floatingLabelBehavior: FloatingLabelBehavior.auto,
+                  ),
 
               ),
 
-              SizedBox(height: 20.0,),
+              SizedBox(height: 35.0,),
               Column(
                 children: <Widget>[
                   MaterialButton(
@@ -168,8 +193,9 @@ class _LoginState extends State<Login> {
 
                 )
 
-            ),
+            )
+          ),
+        );
 
-          );
   }
 }
