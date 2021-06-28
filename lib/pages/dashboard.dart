@@ -14,7 +14,7 @@ class Dashboard extends StatelessWidget {
       body: SafeArea(
         child: Center(
           // width: double.infinity,
-          // height: MediaQuery.of(context).size.height,
+          // height: MediaQuery.of(context).size.height,n
           // padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
           child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
