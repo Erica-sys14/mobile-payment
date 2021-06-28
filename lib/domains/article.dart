@@ -3,7 +3,6 @@ class Article {
   final List <dynamic> article;
 
 
-
   Article(
       this.article
       );
