@@ -67,6 +67,7 @@ class _ArticlesState extends State<Articles> {
                 return ListView.builder(
                     itemCount: snapshot.data!.article.length,
                     itemBuilder: (context, index) {
+
                       return  ListTile(
                         title: Text('${snapshot.data!.article[index]['name']}'),
                         trailing:

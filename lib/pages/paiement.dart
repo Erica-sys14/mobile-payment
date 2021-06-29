@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:myflutter/domains/article.dart';
 import 'package:myflutter/provider/article_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:myflutter/utility/app_url.dart';
+import 'package:http/http.dart';
+
 
 
 class Paiement extends StatefulWidget {
@@ -14,27 +19,36 @@ class Paiement extends StatefulWidget {
 
 class _PaiementState extends State<Paiement> {
   final formKey = GlobalKey<FormState>();
-  late Future<Article> _articles;
+  late List _articles;
   late String _myArticles;
-  late String _myArticlesResult;
   var _provider;
   late String price;
   late String quant;
 
-  _saveForm() {
-    var form = formKey.currentState;
-    if (form != null && form.validate()) {
-      form.save();
-      setState(() {
-        _myArticlesResult = _myArticles;
-      });
+  @override
+ /* void initState(){
+    super.initState();
+    this.getData();
+  }*/
+
+  /**//*
     }
 
-  }
+  }*/
    @override
   Widget build(BuildContext context) {
-     _provider = Provider.of<ArticleProvider>(context);
-     _articles = _provider.list();
+     var responseBody = Provider.of<ArticleProvider>(context).listDropdown();
+     debugPrint(responseBody.toString());
+     setState(() {
+       debugPrint(_articles.toString());
+     });
+
+     var saveForm = () {
+       var form = formKey.currentState;
+       if (form != null && form.validate()) {
+         form.save();
+       };
+     };
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -72,7 +86,7 @@ class _PaiementState extends State<Paiement> {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      DropDownFormField(
+                                      /*DropDownFormField(
                                         titleText: ('Articles'),
                                         hintText: ('please choose one'),
                                         onSaved: (value) {
@@ -86,6 +100,14 @@ class _PaiementState extends State<Paiement> {
                                           });
                                         },
                                         dataSource: [_articles],
+                                      ),*/
+                                      DropdownButton(
+                                          items: _articles.map((item) {
+                                            return new DropdownMenuItem(
+                                                child: new Text('1'),
+                                                value: "2",
+                                            );
+                                          }).toList(),
                                       ),
                                       SizedBox(height: 20,),
                                           Row(
@@ -187,7 +209,7 @@ class _PaiementState extends State<Paiement> {
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           MaterialButton(
-                                            onPressed: () {_saveForm();},
+                                            onPressed: () {},
                                               child: Text('validate'),
                                             textColor: Colors.white,
                                             color: Colors.blue,
@@ -220,5 +242,6 @@ class _PaiementState extends State<Paiement> {
       ),
 
     );
-  }
+}
+
 }

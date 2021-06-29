@@ -78,15 +78,19 @@ class _LoginState extends State<Login> {
         backgroundColor: Colors.white,
         elevation: 0,
         brightness: Brightness.light,
-        centerTitle: true,
-        title: Center(
-          child: Text('Login',
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Login',
+              textAlign: TextAlign.center,
               style: TextStyle(
-
+                color: Colors.black,
                 fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.bold,
               ),
-          ),
+            ),
+          ]
         ),
       ),
       body:SafeArea(
@@ -94,11 +98,11 @@ class _LoginState extends State<Login> {
             width: double.infinity,
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 40,),
-            child: Container(
+            child: Center(
           child: Form(
             key: formKey,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Column(
@@ -174,7 +178,7 @@ class _LoginState extends State<Login> {
 
               ),
 
-              SizedBox(height: 20.0,),
+              SizedBox(height: 40.0,),
               Column(
                 children: <Widget>[
                   MaterialButton(
