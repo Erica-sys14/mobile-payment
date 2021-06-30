@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:myflutter/domains/article.dart';
+import 'package:myflutter/pages/articles.dart';
 import 'package:myflutter/provider/article_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:myflutter/utility/app_url.dart';
@@ -19,9 +20,10 @@ class Paiement extends StatefulWidget {
 
 class _PaiementState extends State<Paiement> {
   final formKey = GlobalKey<FormState>();
-  late List _articles;
+  late List _articles = [];
   late String _myArticles;
-  var _provider;
+  late String dropDownValue;
+  var responseBody;
   late String price;
   late String quant;
 
@@ -37,19 +39,31 @@ class _PaiementState extends State<Paiement> {
   }*/
    @override
   Widget build(BuildContext context) {
-     var responseBody = Provider.of<ArticleProvider>(context).listDropdown();
+     responseBody = Provider.of<ArticleProvider>(context);
      debugPrint(responseBody.toString());
-     setState(() {
+     _articles = responseBody.listDropdown();
+
+     /*setState(() {
        debugPrint(_articles.toString());
      });
+*/
+     // final Future<dynamic> myList = responseBody.listDropdown();
+     // responseBody.then((response) {
+     //   if(response['status']) {
+     //     Navigator.push(
+     //         context,
+     //         MaterialPageRoute(builder: (context) => Articles()));
+     //   }
+     //   return true;
+     // });
 
-     var saveForm = () {
+     /*var saveForm = () {
        var form = formKey.currentState;
        if (form != null && form.validate()) {
          form.save();
        };
      };
-
+*/
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -102,12 +116,27 @@ class _PaiementState extends State<Paiement> {
                                         dataSource: [_articles],
                                       ),*/
                                       DropdownButton(
-                                          items: _articles.map((item) {
+                                          items: _articles.map<DropdownMenuItem<String>>((dropDownValue) {
                                             return new DropdownMenuItem(
-                                                child: new Text('1'),
-                                                value: "2",
+                                                child: new Text('a'),
+                                                value: dropDownValue._articles[0].toString(),
                                             );
                                           }).toList(),
+                                        elevation: 10,
+                                        onChanged: (String? newValue) {
+                                            setState(() {
+                                              dropDownValue = newValue!;
+                                            });
+                                        },
+                                        hint: Text(
+                                          'Please choose your article',
+                                          style: TextStyle(
+                                              color: Colors.black,
+
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400
+                                          ),
+                                        ),
                                       ),
                                       SizedBox(height: 20,),
                                           Row(

@@ -74,26 +74,7 @@ class _LoginState extends State<Login> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        brightness: Brightness.light,
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text('Login',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ]
-        ),
-      ),
-      body:SafeArea(
+      body:SingleChildScrollView(
         child: Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height,
@@ -107,6 +88,16 @@ class _LoginState extends State<Login> {
             children: <Widget>[
               Column(
                 children: <Widget>[
+                  SizedBox(height: 40,),
+                  Text('Login',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SizedBox(height: 20,),
                   Text("Welcome Back",
                     textAlign: TextAlign.center,
                     style: TextStyle( fontFamily: 'Montserrat',
