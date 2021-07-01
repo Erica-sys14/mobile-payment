@@ -29,7 +29,7 @@ class ArticleProvider extends ChangeNotifier {
     return result;
   }
 
-  listDropdown() async {
+  Future<Article> listDropdown() async {
     final prefs = await SharedPreferences.getInstance();
     Response response = await get(
       AppUrl.articles,
