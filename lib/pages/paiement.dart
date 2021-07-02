@@ -96,7 +96,7 @@ class _PaiementState extends State<Paiement> {
                               builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 return DropdownButton(
-                                  items: _articles.map<DropdownMenuItem<String>>((_article) {
+                                  items: _articles.map<DropdownMenuItem<String>>((+) {
                                     return new DropdownMenuItem(
                                       child: new Text('${snapshot.data!.article[0][1]}'),
                                       value: snapshot.data!.article[0][1],
