@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:myflutter/pages/articles.dart';
 import 'package:myflutter/pages/dashboard.dart';
+import 'package:myflutter/pages/facture.dart';
 import 'package:myflutter/pages/paiement.dart';
 import 'package:myflutter/pages/profile.dart';
 
@@ -18,7 +19,7 @@ class _MenuNavbarState extends State<MenuNavbar> {
 
   final Dashboard _dashboard = Dashboard();
   final Articles _articlee = Articles();
-  final Paiement _paiement = Paiement();
+  final ListFacture _facture = ListFacture();
   final Profil _profil = Profil();
 
   Widget _showPage = new Dashboard();
@@ -32,7 +33,7 @@ class _MenuNavbarState extends State<MenuNavbar> {
         return _articlee;
         break;
       case 2:
-        return _paiement;
+        return _facture;
         break;
       case 3:
         return _profil;

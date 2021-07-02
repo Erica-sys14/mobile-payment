@@ -22,7 +22,7 @@ class _PaiementState extends State<Paiement> {
   final formKey = GlobalKey<FormState>();
   late List _articles = <Article>[];
   late String dropDownValue;
-  late final Future<Article> _article;
+  late Future<Article> _article;
   var  responseBody;
   late String price;
   late String quant;
@@ -96,7 +96,7 @@ class _PaiementState extends State<Paiement> {
                               builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 return DropdownButton(
-                                  items: _articles.map<DropdownMenuItem<String>>((+) {
+                                  items: _articles.map<DropdownMenuItem<String>>((_article) {
                                     return new DropdownMenuItem(
                                       child: new Text('${snapshot.data!.article[0][1]}'),
                                       value: snapshot.data!.article[0][1],

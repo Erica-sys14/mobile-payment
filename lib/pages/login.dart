@@ -4,8 +4,10 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myflutter/domains/user.dart';
 import 'package:myflutter/pages/menu.dart';
+import 'package:myflutter/pages/welcome.dart';
 import 'package:myflutter/provider/auth_provider.dart';
 import 'package:myflutter/provider/user_provider.dart';
 import 'package:myflutter/utility/widgets.dart';
@@ -74,11 +76,31 @@ class _LoginState extends State<Login> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_rounded, size: 18, color: Colors.black,),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Welcome()),
+            );
+          },
+        ),
+        elevation: 0,
+        brightness: Brightness.light,
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: Text(
+          'Login',
+          style: GoogleFonts.mavenPro(
+            textStyle: TextStyle(color: Colors.grey, fontSize: 14, fontWeight: FontWeight.bold),)
+        ),
+      ),
       body:SingleChildScrollView(
         child: Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height,
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 40,),
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30,),
             child: Center(
           child: Form(
             key: formKey,
@@ -88,27 +110,19 @@ class _LoginState extends State<Login> {
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  SizedBox(height: 40,),
-                  Text('Login',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  SizedBox(height: 20,),
                   Text("Welcome Back",
                     textAlign: TextAlign.center,
-                    style: TextStyle( fontFamily: 'Montserrat',
-                        fontSize: 30, fontWeight: FontWeight.bold),),
+                    style: GoogleFonts.mavenPro(textStyle: TextStyle( fontFamily: 'Montserrat',
+                        fontSize: 30, fontWeight: FontWeight.bold),)
+                    ),
                   SizedBox(height: 10,),
                   Text("Login with your email and password \n or continue with Nexah Billing",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.mavenPro(textStyle: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[700]
                     ),)
+                  )
                 ],
               ),
 
@@ -125,8 +139,8 @@ class _LoginState extends State<Login> {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(horizontal: 42, vertical: 15),
                  /* prefix: Icon(Icons.email_outlined, size: 24,),*/
-                  labelText: "Pu_ht_custom",
-                  labelStyle: TextStyle(fontSize: 14,color: Colors.grey[700],fontWeight: FontWeight.w600),
+                  labelText: 'Email',
+                  labelStyle: GoogleFonts.mavenPro(textStyle: TextStyle(fontSize: 14,color: Colors.grey[700],fontWeight: FontWeight.w600),),
                   suffixIcon: Icon(Icons.email_outlined, size: 20,),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
@@ -153,8 +167,8 @@ class _LoginState extends State<Login> {
                 onSaved: (value) => _password = value.toString(),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(horizontal: 42, vertical: 15),
-                    labelText: "Pu_ht_custom",
-                    labelStyle: TextStyle(fontSize: 14,color: Colors.grey[700],fontWeight: FontWeight.w600),
+                    labelText: 'Password',
+                    labelStyle: GoogleFonts.mavenPro(textStyle: TextStyle(fontSize: 14,color: Colors.grey[700],fontWeight: FontWeight.w600),),
                     suffixIcon: Icon(Icons.lock_outline, size: 20,),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50),
@@ -183,9 +197,10 @@ class _LoginState extends State<Login> {
                     ),
                     child: Text(
                       "Login",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
+                      style: GoogleFonts.mavenPro(textStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
                         fontSize: 15,
+                      ),
                       ),
                     ),
                   ),

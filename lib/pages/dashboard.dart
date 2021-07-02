@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myflutter/domains/user.dart';
 import 'package:myflutter/provider/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -26,13 +27,11 @@ class Dashboard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         'Welcome to nexah ${user.first_name}',
-                        style: TextStyle(
+                        style: GoogleFonts.mavenPro(textStyle: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-
-
                         ),
-
+                        )
                       ),
                       SizedBox(
                         height: 20,
@@ -40,9 +39,9 @@ class Dashboard extends StatelessWidget {
                       Text(
                         "Thank you to join our mobile payment platform",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: GoogleFonts.mavenPro(textStyle: TextStyle(
                           fontSize: 15,
-
+                        ),
                         ),
                       )
                     ],

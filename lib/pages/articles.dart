@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myflutter/domains/article.dart';
 import 'package:myflutter/pages/menu.dart';
 import 'package:myflutter/pages/new_articles.dart';
@@ -39,12 +40,23 @@ class _ArticlesState extends State<Articles> {
     _articles = _provider.list();
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: .0,
           backgroundColor: Colors.white,
+          centerTitle: true,
+          title: Text(
+            'Mes Articles',
+            style: GoogleFonts.mavenPro(textStyle: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w600
+            ),
+            )
+          ),
           actions: [
           IconButton(
             onPressed: () {
@@ -53,12 +65,13 @@ class _ArticlesState extends State<Articles> {
                 MaterialPageRoute(builder: (context) => New_Articles()),
               );
             },
-            icon: Icon(Icons.add, color: Colors.black, size: 25,),
+            icon: Icon(Icons.add, color: Colors.black, size: 20,),
           ),
           ],
         ),
         body:
         Center(
+
           child: FutureBuilder<Article>(
             future: _articles,
             builder: (context, snapshot) {

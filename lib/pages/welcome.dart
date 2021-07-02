@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myflutter/pages/menu.dart';
 import 'login.dart';
 
@@ -8,6 +9,7 @@ class Welcome extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold (
+
       body: SafeArea(
         child: Container(
           width: double.infinity,
@@ -21,24 +23,24 @@ class Welcome extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Welcome",
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(textStyle: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
-
                     ),
+                    )
 
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Text(
                     "Billing Mobile App from Nexah",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(textStyle: TextStyle(
                       color: Colors.blue[700],
                       fontSize: 15,
-
                     ),
+                    )
                   )
                 ],
               ),
@@ -71,10 +73,12 @@ class Welcome extends StatelessWidget {
                     ),
                     child: Text(
                       "Login",
-                      style: TextStyle(
+                      style: GoogleFonts.mavenPro(
+                        textStyle:  TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 15,
                       ),
+                      )
                     ),
                   ),
 
