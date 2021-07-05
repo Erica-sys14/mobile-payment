@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myflutter/pages/paiement.dart';
 
 class ListFacture extends StatelessWidget {
@@ -16,17 +17,20 @@ class ListFacture extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          toolbarHeight: 65,
           elevation: 0,
           centerTitle: true,
           title: Text(
             'Mes factures',
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: GoogleFonts.mavenPro(textStyle: TextStyle(
               color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
             ),
+            )
           ),
           brightness: Brightness.light,
           backgroundColor: Colors.white,
@@ -42,24 +46,29 @@ class ListFacture extends StatelessWidget {
           ],
         ),
         body: ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
           itemCount: facture.length,
           itemBuilder: (context, index) {
-            return Padding(
-                padding: EdgeInsets.only(bottom: 16.0),
-              child: Card(
+            return Card(
+                elevation: 1.0,
                 color: Colors.white,
-                child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                  child: Text(
-                    facture[index],
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      height: 1.6
+                margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 6.0),
+                child: Container(
+                  decoration: BoxDecoration(color: Colors.white70),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 6.0),
+                    title: Text(facture[index],
+                      style: GoogleFonts.mavenPro(textStyle: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                      ),
+                      ),
                     ),
+                   /* facture[index],
+                    style: */
                   ),
                 ),
-              ),
             );
           },
         ),

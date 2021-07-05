@@ -17,34 +17,54 @@ class Dashboard extends StatelessWidget {
           // width: double.infinity,
           // height: MediaQuery.of(context).size.height,n
           // padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
-          child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
+          child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 28, vertical: 40),
+              width: double.infinity,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        'Welcome to nexah ${user.first_name}',
+                        'Dashboard',
                         style: GoogleFonts.mavenPro(textStyle: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                          fontSize: 28,
+                          height: 1
                         ),
                         )
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "Thank you to join our mobile payment platform",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.mavenPro(textStyle: TextStyle(
-                          fontSize: 15,
-                        ),
-                        ),
-                      )
                     ],
+                  ),
+                  SizedBox(
+                    height: 7,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          'Welcome to nexah ${user.first_name}',
+                          style: GoogleFonts.mavenPro(textStyle: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
+                              height: 1,
+                              color: Colors.black38
+                          ),
+                          )
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Text(
+                    "Thank you to join our mobile payment platform",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.mavenPro(textStyle: TextStyle(
+                      fontSize: 15,
+                    ),
+                    ),
                   ),
                 ],
               ),

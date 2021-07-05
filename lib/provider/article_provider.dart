@@ -29,7 +29,7 @@ class ArticleProvider extends ChangeNotifier {
     return result;
   }
 
-  Future<Article> listDropdown() async {
+  Future<List<NewArticle>> listDropdown() async {
     final prefs = await SharedPreferences.getInstance();
     Response response = await get(
       AppUrl.articles,
@@ -38,11 +38,17 @@ class ArticleProvider extends ChangeNotifier {
         'Authorization': prefs.getString("api_key")
       },
     );
-
     var result;
+    print(response.body);
 
     if (response.statusCode == 200) {
-      return json.decode(response.body)['data']['data'];
+      /*return json.decode(response.body)['data']['data'];*/
+      result = json.decode(response.body)['data']['data'];
+      var resultats ;
+      for(var i = 0; i < result.length; i++){
+          resultats.push((result[i] as List<NewArticle>).map((article) => article));
+      }
+      return resultats;
     }
 
     return result;

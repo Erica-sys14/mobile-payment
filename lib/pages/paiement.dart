@@ -19,6 +19,8 @@ class Paiement extends StatefulWidget {
 }
 
 class _PaiementState extends State<Paiement> {
+  late Future<List<NewArticle>> futureArticles;
+  Map<String, dynamic> _selected = {'name': '', 'description':'Select Country'};
   final formKey = GlobalKey<FormState>();
   late List _articles = <Article>[];
   late String dropDownValue;
@@ -28,20 +30,14 @@ class _PaiementState extends State<Paiement> {
   late String quant;
 
   @override
- /* void initState(){
+  void initState(){
     super.initState();
-    this.getData();
-  }*/
+  }
 
-  /**//*
-    }
 
-  }*/
    @override
   Widget build(BuildContext context) {
-     responseBody = Provider.of<ArticleProvider>(context);
-     debugPrint(responseBody.toString());
-     _article = responseBody.listDropdown();
+     futureArticles = Provider.of<ArticleProvider>(context).listDropdown();
 
      /*setState(() {
        debugPrint(_articles.toString());
@@ -91,23 +87,18 @@ class _PaiementState extends State<Paiement> {
                       SizedBox(height: 20,),
                       Form(
                           key: formKey,
-                          child: FutureBuilder<Article>(
-                            future: _article,
+                          child: FutureBuilder<List<NewArticle>>(
+                            future: futureArticles,
                               builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 return DropdownButton(
-                                  items: _articles.map<DropdownMenuItem<String>>((_article) {
-                                    return new DropdownMenuItem(
-                                      child: new Text('${snapshot.data!.article[0][1]}'),
-                                      value: snapshot.data!.article[0][1],
+                                  items: snapshot.data!.map<DropdownMenuItem<String>>((NewArticle value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value.name,
+                                      child: Text(value.description),
                                     );
                                   }).toList(),
                                   elevation: 10,
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      snapshot.data!.article[0][1] = newValue!;
-                                    });
-                                  },
                                   hint: Text(
                                     'Please choose your article',
                                     style: TextStyle(

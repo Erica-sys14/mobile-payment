@@ -44,62 +44,81 @@ class _ArticlesState extends State<Articles> {
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          elevation: .0,
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          title: Text(
-            'Mes Articles',
-            style: GoogleFonts.mavenPro(textStyle: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.w600
-            ),
-            )
-          ),
-          actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => New_Articles()),
-              );
-            },
-            icon: Icon(Icons.add, color: Colors.black, size: 20,),
-          ),
-          ],
-        ),
-        body:
-        Center(
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 60),
+                width: double.infinity,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                            child: Text(
+                                'Mes articles',
+                                style: GoogleFonts.mavenPro(textStyle: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 28,
+                                ),
+                                )
+                            ),
+                          )
+                        ],
+                      ),
+                      FutureBuilder<Article>(
+                        future: _articles,
+                        builder: (context, snapshot) {
+                          debugPrint('ok');
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: snapshot.data!.article.length,
+                                itemBuilder: (context, index) {
+                                  return Card(
+                                      elevation: 1.0,
+                                      color: Colors.white,
+                                      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                                      child: Container(
+                                          decoration: BoxDecoration(color: Colors.white70),
+                                          child: ListTile(
+                                            contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 6.0),
+                                            title: Text(
+                                              '${snapshot.data!.article[index]['name']}',
+                                              style: GoogleFonts.mavenPro(textStyle: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                              ),
+                                            ),
+                                            trailing:
+                                            PopupMenuButton<int>(
+                                                color: Colors.white,
+                                                elevation: 10,
+                                                onSelected: (items) => SelectItems(context, items, '${snapshot.data!.article[index]['id']}'),
+                                                icon: Icon(Icons.more_vert, size: 25, color: Colors.grey,),
+                                                itemBuilder: (context) => <PopupMenuEntry<int>>[
+                                                  PopupMenuItem<int>(
+                                                    value: 0,
+                                                    child: Text('Supprimer',
+                                                      style: GoogleFonts.mavenPro(textStyle: TextStyle(
+                                                        fontSize: 14,
+                                                        fontWeight: FontWeight.w400,
+                                                      ),
+                                                      ),),
+                                                  ),
+                                                ]),
 
-          child: FutureBuilder<Article>(
-            future: _articles,
-            builder: (context, snapshot) {
-              debugPrint('ok');
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data!.article.length,
-                    itemBuilder: (context, index) {
 
-                      return  ListTile(
-                        title: Text('${snapshot.data!.article[index]['name']}'),
-                        trailing:
-                        PopupMenuButton<int>(
-                            color: Colors.white,
-                            elevation: 10,
-                            onSelected: (items) => SelectItems(context, items, '${snapshot.data!.article[index]['id']}'),
-                            icon: Icon(Icons.more_vert, size: 25, color: Colors.grey,),
-                            itemBuilder: (context) => <PopupMenuEntry<int>>[
-                              PopupMenuItem<int>(
-                                value: 0,
-                                child: Text('Supprimer'),
-                              ),
-                            ]),
-                        /*
+                                          )
+                                      )
+                                  );
 
-                        */);
 
-                      /*  Dismissible(
+                                  /*  Dismissible(
                         key: Key(snapshot.data!.article[index]['id'].toString()),
                         onDismissed: (DismissDirection direction){
                           setState(() {
@@ -110,16 +129,24 @@ class _ArticlesState extends State<Articles> {
                         child:
 
                        );*/
-                    });
-              }
-              else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
+                                });
+                          }
+                          else if (snapshot.hasError) {
+                            return Text("${snapshot.error}");
+                          }
 
-              // By default, show a loading spinner.
-              return CircularProgressIndicator();
-            },
-          ),
+                          // By default, show a loading spinner.
+                          return CircularProgressIndicator();
+                        },
+                      ),
+                    ]
+
+                )
+
+            ),
+          )
+
+
         ),
       ),
     );
