@@ -38,21 +38,35 @@ class ArticleProvider extends ChangeNotifier {
         'Authorization': prefs.getString("api_key")
       },
     );
-    var result;
+    var result = json.decode(response.body)['data']['data'];
     print(response.body);
 
-    if (response.statusCode == 200) {
-      /*return json.decode(response.body)['data']['data'];*/
-      result = json.decode(response.body)['data']['data'];
-      var resultats ;
-      for(var i = 0; i < result.length; i++){
-          resultats.push((result[i] as List<NewArticle>).map((article) => article));
-      }
-      return resultats;
+    List<NewArticle> dropdown = [];
+
+    for(var u in result) {
+
+      NewArticle mylist = NewArticle(u['name'],u['description'],u['is_rate'],u['check_stored'],u['pu_ht'],u['pu_ht_custom'],u['crated_at']);
+
+      dropdown.add(mylist);
     }
 
-    return result;
-  }
+    // if (response.statusCode == 200) {
+    //   /*return json.decode(response.body)['data']['data'];*/
+    //   result = json.decode(response.body)['data']['data'];
+    //   var resultats ;
+    //   for(var i = 0; i < result.length; i++){
+    //       resultats.push((result[i] as List<NewArticle>).map((article) => article));
+    //   }
+    //   return resultats;
+    // }
+    //
+    // return result;
+
+      return dropdown;
+    }
+
+
+
 
 
 

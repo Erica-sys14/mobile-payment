@@ -38,7 +38,8 @@ class NewArticle {
 
       );
 
-  factory NewArticle.fromJson(Map<String, dynamic> jsonData) {
+
+  /*factory NewArticle.fromJson(Map<String, dynamic> jsonData) {
     return NewArticle(
       jsonData['name'],
       jsonData['description'],
@@ -49,5 +50,5 @@ class NewArticle {
       jsonData['created_at'],
 
     );
-  }
+  }*/
 }

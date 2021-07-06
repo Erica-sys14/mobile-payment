@@ -23,7 +23,7 @@ class Welcome extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     "Welcome",
-                    style: GoogleFonts.montserrat(textStyle: TextStyle(
+                    style: GoogleFonts.mavenPro(textStyle: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
                     ),
@@ -31,12 +31,12 @@ class Welcome extends StatelessWidget {
 
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
                   Text(
                     "Billing Mobile App from Nexah",
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.montserrat(textStyle: TextStyle(
+                    style: GoogleFonts.mavenPro(textStyle: TextStyle(
                       color: Colors.blue[700],
                       fontSize: 15,
                     ),

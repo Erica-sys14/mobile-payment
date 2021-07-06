@@ -92,12 +92,15 @@ class _PaiementState extends State<Paiement> {
                               builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 return DropdownButton(
-                                  items: snapshot.data!.map<DropdownMenuItem<String>>((NewArticle value) {
+                                  items: snapshot.data!.map<DropdownMenuItem<String>>((mylist) {
                                     return DropdownMenuItem<String>(
-                                      value: value.name,
-                                      child: Text(value.description),
+                                      value: mylist.name,
+                                      child: Text(mylist.name),
                                     );
                                   }).toList(),
+                                  onChanged: (newValue){
+                                    _selected = newValue as Map<String, dynamic>;
+                                  },
                                   elevation: 10,
                                   hint: Text(
                                     'Please choose your article',
